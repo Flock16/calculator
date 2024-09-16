@@ -42,7 +42,6 @@ body {
 .calc-screen > h2 {
   height: 40px;
   font-size: 40px;
-  /* text-align: right; */
   word-break: break-all;
   overflow: hidden;
 }
@@ -52,7 +51,6 @@ body {
 }
 
 .calc-buttons-container > div {
-  /* border: solid black; */
   width: 90%;
   display: flex;
   justify-content: space-between;
@@ -61,6 +59,7 @@ body {
 
 .calc-buttons-container > div > button,
 .calc-buttons-container > div > div > button {
+  border: none;
   margin: 2px;
   border-radius: 10px;
   width: 90px;
