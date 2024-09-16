@@ -3,6 +3,9 @@ const numberButtons = document.querySelectorAll(".number-button");
 const operatorButtons = document.querySelectorAll(".operator-button");
 const clearButtons = document.querySelectorAll(".clear-button");
 const equalsButton = document.querySelector(".equals-button");
+const negativePositiveButton = document.querySelector(
+  ".negative-positive-button"
+);
 const divideByZeroMessage = "Shameless";
 
 let firstNumber = "";
@@ -35,6 +38,10 @@ equalsButton.addEventListener("click", (event) => {
   handleEqualsInput();
 });
 
+negativePositiveButton.addEventListener("click", () =>
+  handleNegativePositiveToggle()
+);
+
 const handleNumberInput = (input) => {
   if (clearScreen) {
     display.textContent = "";
@@ -64,8 +71,8 @@ const handleOperatorInput = (button, input) => {
   clearOperatorButtonHighlight();
   addOperatorButtonHighlight(button);
   if (operator) handleEqualsInput();
-  operator = input;
   firstNumber = display.textContent;
+  operator = input;
   clearScreen = true;
 };
 
@@ -81,6 +88,14 @@ const handleEqualsInput = () => {
   secondNumber = "";
   operator = "";
   clearScreen = true;
+};
+
+const handleNegativePositiveToggle = () => {
+  if (display.textContent) {
+    display.textContent.includes("-")
+      ? (display.textContent = display.textContent.slice(1))
+      : (display.textContent = "-" + display.textContent);
+  }
 };
 
 const operate = (firstNumber, secondNumber, operator) => {

@@ -69,7 +69,8 @@ body {
 }
 
 .number-button,
-.equals-button {
+.equals-button,
+.negative-positive-button {
   background-color: darkgray;
 }
 
