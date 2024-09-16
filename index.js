@@ -73,17 +73,11 @@ const handleEqualsInput = () => {
   if (!firstNumber || !operator) return;
   secondNumber = display.textContent;
   if (operator === "/" && secondNumber === "0") {
-    display.textContent = divideByZeroMessage;
-    clearScreen = true;
-    firstNumber = "";
-    secondNumber = "";
-    operator = "";
+    handleDivideByZero();
     return;
   }
   let result = operate(firstNumber, secondNumber, operator);
-  display.textContent = result;
-
-  firstNumber = result;
+  display.textContent = firstNumber = result;
   secondNumber = "";
   operator = "";
   clearScreen = true;
@@ -124,6 +118,13 @@ const addOperatorButtonHighlight = (button) => {
 };
 const fullClear = () => {
   display.textContent = "";
+  firstNumber = "";
+  secondNumber = "";
+  operator = "";
+};
+const handleDivideByZero = () => {
+  display.textContent = divideByZeroMessage;
+  clearScreen = true;
   firstNumber = "";
   secondNumber = "";
   operator = "";
