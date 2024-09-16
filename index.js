@@ -79,7 +79,7 @@ const handleOperatorInput = (button, input) => {
   if (operator) handleEqualsInput();
   firstNumber = display.textContent;
   operator = input;
-  topDisplay.textContent = `${firstNumber} ${operator}`;
+  if (firstNumber) topDisplay.textContent = `${firstNumber} ${operator}`;
   clearTopScreen = false;
   clearBottomScreen = true;
 };
