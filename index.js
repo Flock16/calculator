@@ -1,3 +1,4 @@
+const topDisplay = document.querySelector(".calc-screen > h3");
 const display = document.querySelector(".calc-screen > h2");
 const numberButtons = document.querySelectorAll(".number-button");
 const operatorButtons = document.querySelectorAll(".operator-button");
@@ -11,7 +12,8 @@ const divideByZeroMessage = "Shameless";
 let firstNumber = "";
 let secondNumber = "";
 let operator = "";
-let clearScreen = false;
+let clearBottomScreen = false;
+let clearTopScreen = false;
 
 operatorButtons.forEach((button) => {
   button.addEventListener("click", (event) => {
@@ -34,7 +36,7 @@ clearButtons.forEach((button) => {
   });
 });
 
-equalsButton.addEventListener("click", (event) => {
+equalsButton.addEventListener("click", () => {
   handleEqualsInput();
 });
 
@@ -43,9 +45,13 @@ negativePositiveButton.addEventListener("click", () =>
 );
 
 const handleNumberInput = (input) => {
-  if (clearScreen) {
+  if (clearBottomScreen) {
     display.textContent = "";
-    clearScreen = false;
+    clearBottomScreen = false;
+  }
+  if (clearTopScreen) {
+    topDisplay.textContent = "";
+    clearTopScreen = false;
   }
   if (input === "." && display.textContent.includes(".")) {
     return;
@@ -73,7 +79,9 @@ const handleOperatorInput = (button, input) => {
   if (operator) handleEqualsInput();
   firstNumber = display.textContent;
   operator = input;
-  clearScreen = true;
+  topDisplay.textContent = `${firstNumber} ${operator}`;
+  clearTopScreen = false;
+  clearBottomScreen = true;
 };
 
 const handleEqualsInput = () => {
@@ -83,11 +91,13 @@ const handleEqualsInput = () => {
     handleDivideByZero();
     return;
   }
+  topDisplay.textContent = `${firstNumber} ${operator} ${secondNumber} =`;
   let result = operate(firstNumber, secondNumber, operator);
   display.textContent = firstNumber = result;
   secondNumber = "";
   operator = "";
-  clearScreen = true;
+  clearBottomScreen = true;
+  clearTopScreen = true;
 };
 
 const handleNegativePositiveToggle = () => {
@@ -136,10 +146,11 @@ const fullClear = () => {
   firstNumber = "";
   secondNumber = "";
   operator = "";
+  topDisplay.textContent = "";
 };
 const handleDivideByZero = () => {
   display.textContent = divideByZeroMessage;
-  clearScreen = true;
+  clearBottomScreen = true;
   firstNumber = "";
   secondNumber = "";
   operator = "";

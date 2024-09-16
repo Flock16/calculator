@@ -35,8 +35,10 @@ body {
   padding: 10px 20px;
   margin: 0px 20px;
   display: flex;
+  flex-direction: column;
   justify-content: end;
   align-items: end;
+  gap: 20px;
 }
 
 .calc-screen > h2 {
